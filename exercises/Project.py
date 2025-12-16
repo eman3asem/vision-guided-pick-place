@@ -14,7 +14,7 @@ from robot import *
 Close_gripper=255
 Open_gripper=0
 
-def points(robot, d, m, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame):
+def points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame):
 
     via_points_list = []
     q0 = robot.get_current_q()
@@ -84,8 +84,9 @@ def parabolic_q_interpolation(start_q, end_q, steps):
 ## ======= excercise 4 code end ======= ##
 
 ## ======= excercise 5 code below ======= ##
-def via_points(via_q, steps):
+def via_points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame, steps):
     print("Generating P2P trajectory")
+    via_q= points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame)
     P2P_trajectory = []
     for i in range(1, len(via_q)):
         P2P_trajectory.extend(parabolic_q_interpolation(start_q=via_q[i-1], end_q=via_q[i], steps=steps))
@@ -264,11 +265,11 @@ def program(d, m):
     usr_input = input("Points/RRT: ")
 
     trajectory = []
-    via_q=points(robot, d, m, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame)
+    # via_q=points(robot, d, m, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame)
     # Point to Point with Trapazoidal Velocity Profile
     if usr_input.lower() == "points":
         print("Point to Point planner")
-        trajectory = via_points(via_q, steps=800)
+        trajectory = via_points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame, steps=800)
     # RRT
     elif usr_input.lower() == "rrt":
         print("RRT Planner")
