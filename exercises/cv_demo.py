@@ -103,14 +103,15 @@ def program(d, m):
     
     # only choosing the traslation frame for grasping
     duck_position = duck_world_pose.t
-    # adding a normal rotation to the grasp frame
+    # adding a known normal rotation to the grasp frame
     R_grasp = sm.SE3.Rx(-np.pi)
 
     #setting the frames for the Point-to-Point interpolator
     obj_frame = sm.SE3.Rt(R_grasp.R, duck_position) *sm.SE3.Rz(np.pi/2)
-    obj_drop_frame = get_mjobj_frame(model=m, data=d, obj_name="zone_pickup") *sm.SE3.Rx(-np.pi) *sm.SE3.Rx(-np.pi)
+    obj_drop_frame = get_mjobj_frame(model=m, data=d, obj_name="zone_drop") *sm.SE3.Rx(-np.pi) * sm.SE3.Tz(-0.30)
+    
 
-    pick_zone_frame = get_mjobj_frame(model=m, data=d, obj_name="zone_pickup") *sm.SE3.Rx(-np.pi)*sm.SE3.Tz(-0.15) # Pick zone
+    pick_zone_frame = obj_frame * sm.SE3.Tz(-0.15) # Pick zone
     drop_zone_frame = get_mjobj_frame(model=m, data=d, obj_name="zone_drop") *sm.SE3.Rx(-np.pi)*sm.SE3.Tz(-0.15) # Drop zone
     
     # getting the trajectory using Point-to-Point interpolator with trapezoidal velocity profile

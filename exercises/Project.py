@@ -32,11 +32,11 @@ def points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame):
         #3
         q_pick = robot.robot_ur5.ik_LM(Tep=obj_frame[i], q0=q_pre_pick)[0]
         via_points_list.append((q_pick,Close_gripper))
-        
+
         #4
         q_after_pick = robot.robot_ur5.ik_LM(Tep=obj_frame[i] * sm.SE3.Tz(-0.15), q0=q_pick)[0]
         via_points_list.append((q_after_pick, Close_gripper))
-        
+
         #5
         q_start_zone=robot.robot_ur5.ik_LM(Tep=pick_zone_frame, q0=q_after_pick)[0]
         via_points_list.append((q_start_zone, Close_gripper))
@@ -46,7 +46,7 @@ def points(robot, obj_frame, obj_drop_frame, pick_zone_frame, drop_zone_frame):
         via_points_list.append((q_drop_zone, Close_gripper))
 
         #7
-        q_pre_drop = robot.robot_ur5.ik_LM(Tep=obj_drop_frame[i] * sm.SE3.Tz(-0.15), q0=q_drop_zone)[0]
+        q_pre_drop = robot.robot_ur5.ik_LM(Tep=obj_drop_frame[i] * sm.SE3.Tz(0.15), q0=q_drop_zone)[0]
         via_points_list.append((q_pre_drop, Open_gripper))
 
         #8
@@ -255,11 +255,11 @@ def program(d, m):
     drop_zone_frame = get_mjobj_frame(model=m, data=d, obj_name="drop_point_cylinder") *  sm.SE3.Rx(np.pi)  # Get body frame
 
     # obj_frame, obj_drop_frame = [(cylinder_frame, drop_point_cylinder_frame), (t_block_frame, drop_point_t_block_frame), (box_frame, drop_point_box_frame)]
-    obj_frame = [ cylinder_frame,t_block_frame, box_frame]
-    obj_drop_frame = [drop_point_cylinder_frame, drop_point_t_block_frame, drop_point_box_frame]
+    # obj_frame = [ cylinder_frame,t_block_frame, box_frame]
+    # obj_drop_frame = [drop_point_cylinder_frame, drop_point_t_block_frame, drop_point_box_frame]
     
-    # obj_frame = [t_block_frame, box_frame, cylinder_frame]
-    # obj_drop_frame = [drop_point_t_block_frame, drop_point_box_frame, drop_point_cylinder_frame]
+    obj_frame = [t_block_frame, box_frame, cylinder_frame]
+    obj_drop_frame = [drop_point_t_block_frame, drop_point_box_frame, drop_point_cylinder_frame]
     # ===== EXPLICITLY SET PLANNER =====
 
     usr_input = input("Points/RRT: ")
