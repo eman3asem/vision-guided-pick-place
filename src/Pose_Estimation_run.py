@@ -7,7 +7,7 @@ import numpy as np
 import copy
 
 
-import src.Pose_Estimation as Pose_Estimation
+import src.pose_estimation as Pose_Estimation
 import helpers
 import settings
 

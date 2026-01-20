@@ -23,7 +23,7 @@ from PIL import Image
 
 from src.robot import *
 from src.cam import *
-from src.Integration_demo import program
+from src.integration_demo import program
 
 # Supporting: Ubuntu 22-24, python 3.10 
 
