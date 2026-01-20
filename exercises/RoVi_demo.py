@@ -9,10 +9,10 @@ import mujoco
 from cam import *
 
 from robot import *
-from exercises.do_pe import do_pose_estimation
+from exercises.CV_Project import do_pose_estimation
 
 from cam import get_pointcloud, get_camera_pose_cv
-from exercises.Project import via_points
+from exercises.Robotics_Project import via_points
 from exercises.helpers import computeError
 
 

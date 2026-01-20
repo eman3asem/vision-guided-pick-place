@@ -1,7 +1,4 @@
 activate the virtual environment:
 source venv/bin/activate
 
-you need to change the name of the expercise before running mujoco
 mjpython main.py
-
-python3 ./exercises/WS_example.py

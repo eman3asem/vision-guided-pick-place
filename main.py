@@ -25,7 +25,7 @@ from robot import *
 from cam import *
 # from exercises.exercise_9_sol import program
 # from exercises.Project import program
-from exercises.cv_demo import program
+from exercises.RoVi_demo import program
 
 # Supporting: Ubuntu 22-24, python 3.10 
 

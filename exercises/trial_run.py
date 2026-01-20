@@ -7,7 +7,7 @@ import numpy as np
 import copy
 
 
-import do_pe
+import exercises.CV_Project as CV_Project
 # import do_pe_gemini as do_pe
 import helpers
 import settings
@@ -28,7 +28,7 @@ def main():
 
     o3d.visualization.draw_geometries([object_pointcloud, scene_pointcloud_noisy], window_name='Pre alignment')
 
-    estimated_pose = do_pe.do_pose_estimation(scene_pointcloud_noisy, object_pointcloud)
+    estimated_pose = CV_Project.do_pose_estimation(scene_pointcloud_noisy, object_pointcloud)
     
 
     print("Final pose")
